@@ -17,10 +17,14 @@
     <ProjectReference Remove="samples/ControlCatalog.Desktop/*.*proj" />
   </ItemGroup>
 
-  <ItemGroup Condition="!$([MSBuild]::IsOsPlatform('Windows'))">
+  <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Linux'))">
     <!-- Build mobile backends only on Windows, where we have installed android workload -->
     <ProjectReference Remove="src/iOS/**/*.*proj" />
     <ProjectReference Remove="src/Tizen/**/*.*proj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Osx'))">
+    <ProjectReference Remove="src/Android/**/*.*proj" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(SkipObscurePlatforms)' == 'True'">
